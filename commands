@@ -1,0 +1,29 @@
+mvn package ...............which create a .war file in target folder
+create a folder with some name for example package and copy .war file from target folder to package folder(create package folder in the same path were target folder hhas created)
+cp target/demo.war root/peerxp/packagee
+create a Dockerfile in the same path nothing but our sourcecode path 
+vim Dockerfile
+explanation:
+take a base image as tomcat from dockerhub because were are deploying our appimage into tomcat server
+FROM tomcat:9.0
+copy the .war file into tomactserver path 
+COPY packagee/demo.war /usr/local/tomcat/webapps/ tomcat server path is common path where our demo.war is copying
+next step is we will expose here our container port 
+EXPOSE 8080
+next run the tomcat server by using CMD ["catalina.sh", "run"]
+explanation finished
+now build the docker image by tagging with some name
+docker build -t myapp .
+and create a container with tagged image
+docker run -it -d -p 8080:8080 myapp:latest
+here we are mapping our container port 8080 to hostport 8000
+open the hostport in instance security groups
+now copy the instance ip address 
+44.203.82.35:8000/demo/---------------paste in google........demo is nothing but when we copy our demo.war to tomact server path it create app as demo
+
+
+
+
+
+
+
